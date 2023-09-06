@@ -5,13 +5,13 @@ Figures in the report (and the associated code included here) were variously gen
 
 For figures generated in python, Jupyter notebooks are included here. A number of packages are required to reproduce these plots, all of which are open source and available for installation via conda or pip. These include:
 
--- matplotlib
--- xarray
--- cartopy
--- numpy
--- metpy
--- plotly
--- scipy
--- pandas
--- pymannkendall
--- palettable
+- matplotlib
+- xarray
+- cartopy
+- numpy
+- metpy
+- plotly
+- scipy
+- pandas
+- pymannkendall
+- palettable
