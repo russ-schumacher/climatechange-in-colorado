@@ -1,0 +1,258 @@
+%% Climate Change in Colorado: Figure 2.12
+
+%This figure will compare PRISM precipitation data to the ENSO cycle for
+%1951-2020
+
+%Note: I downloaded PRISM data all the way back to 1905. Only 1951-2020
+%will be necessary to recreate this figure
+
+yr = ['1905';'1906';'1907';'1908';'1909';'1910';'1911';'1912';'1913';...
+    '1914';'1915';'1916';'1917';'1918';'1919';'1920';'1921';'1922';...
+    '1923';'1924';'1925';'1926';'1927';'1928';'1929';'1930';'1931';...
+    '1932';'1933';'1934';'1935';'1936';'1937';'1938';'1939';'1940';...
+    '1941';'1942';'1943';'1944';'1945';'1946';'1947';'1948';'1949';...
+    '1950';'1951';'1952';'1953';'1954';'1955';'1956';'1957';'1958';...
+    '1959';'1960';'1961';'1962';'1963';'1964';'1965';'1966';'1967';...
+    '1968';'1969';'1970';'1971';'1972';'1973';'1974';'1975';'1976';...
+    '1977';'1978';'1979';'1980';'1981';'1982';'1983';'1984';'1985';...
+    '1986';'1987';'1988';'1989';'1990';'1991';'1992';'1993';'1994';...
+    '1995';'1996';'1997';'1998';'1999';'2000';'2001';'2002';'2003';...
+    '2004';'2005';'2006';'2007';'2008';'2009';'2010';'2011';'2012';...
+    '2013';'2014';'2015';'2016';'2017';'2018';'2019';'2020';'2021';...
+    '2022'];
+
+%Note: I also downloaded max and min temperature data. It will not be
+%needed to reproduce the figure at the end either
+
+% Temperature and Precip averages (start with 1950-2020)
+monp = zeros(101,172,117,12);
+monx = zeros(101,172,117,12);
+monn = zeros(101,172,117,12);
+AT = zeros(101,172); %average temperature
+AP = zeros(101,172); %average precipitation
+
+%This loop reads all the PRISM datra from my hard drive. You will need to
+%download the PRISM data and adjust the filepath before executing this
+%loop.
+
+%PRISM data download instructions are found here: 
+%https://prism.oregonstate.edu/documents/PRISM_downloads_web_service.pdf
+
+for i = 1:117
+    for j = 1:12
+        if i < 77
+            name1 = sprintf('H:/PRISM Data/Monthly/Precipitation/PRISM_ppt_stable_4kmM2_%s%s_bil.bil',yr(i,:),mo(j,:));
+        else
+            name1 = sprintf('H:/PRISM Data/Monthly/Precipitation/PRISM_ppt_stable_4kmM3_%s%s_bil.bil',yr(i,:),mo(j,:));
+        end
+                
+                name2 = sprintf('H:/PRISM Data/Monthly/Max Temp/PRISM_tmax_stable_4kmM3_%s%s_bil.bil',yr(i,:),mo(j,:));
+                name3 = sprintf('H:/PRISM Data/Monthly/Min Temp/PRISM_tmin_stable_4kmM3_%s%s_bil.bil',yr(i,:),mo(j,:));
+                
+                precip = multibandread(name1,[621 1405 1],'float32',0,'bil','ieee-le');
+                tmax = multibandread(name2,[621 1405 1],'float32',0,'bil','ieee-le');
+                tmin = multibandread(name3,[621 1405 1],'float32',0,'bil','ieee-le');
+                
+                D = size(precip);
+                for x = 1:D(1)
+                    for y = 1:D(2)
+                        if precip(x,y) == -9999
+                            precip(x,y) = NaN;
+                        end
+                    end
+                end
+                
+                D = size(tmax);
+                for x = 1:D(1)
+                    for y = 1:D(2)
+                        if tmax(x,y) == -9999
+                            tmax(x,y) = NaN;
+                        end
+                    end
+                end
+                
+                D = size(tmin);
+                for x = 1:D(1)
+                    for y = 1:D(2)
+                        if tmin(x,y) == -9999
+                            tmin(x,y) = NaN;
+                        end
+                    end
+                end
+                
+                precip = precip/25.4;
+                tmax = tmax*9/5+32;
+                tmin = tmin*9/5+32;
+                
+                for x = 1:D(2)
+                    precip(:,x) = flip(precip(:,x));
+                    tmax(:,x) = flip(tmax(:,x));
+                    tmin(:,x) = flip(tmin(:,x));
+                end
+                
+                precip = precip(310:410,384:555);
+                tmax = tmax(310:410,384:555);
+                tmin = tmin(310:410,384:555);
+                
+                monp(:,:,i,j) = precip;
+                monx(:,:,i,j) = tmax;
+                monn(:,:,i,j) = tmin;
+                AP = AP + precip./40; %number of months
+                AT = AT + (tmax+tmin)./(960); %2x number of months
+               
+        disp(j)
+    end
+    disp(i)
+end
+
+%The two figures below are just to check that output from these files looks
+%reasonable. They have been commented out
+% figure; ax = usamap([36.9 41.1],[-109.1 -101.9]);
+% pcolorm(cololats,cololons,AP)
+% colormap(flipud(viridis_cmap))
+% caxis([5 60])
+% colorbar
+% geoshow(ax,counties,'facecolor','none');
+% title('Colorado Average Annual Precipitation (1981-2020)')
+% 
+% figure; ax = usamap([36.9 41.1],[-109.1 -101.9]);
+% pcolorm(cololats,cololons,AT)
+% % colormap(flipud(inferno_cmap))
+% caxis([25 55])
+% colorbar
+% geoshow(ax,counties,'facecolor','none');
+% title('Colorado Average Annual Temperature (1981-2020)')
+
+%difference between old and new normals
+
+% ENSO ONI vs Precip (start with 1981-2020)
+
+sp = zeros(101,172,70,4); %seasonal precip 1951-2020 (lat x lon x nyears x nseasons)
+for i = 2:71
+    for j = 1:101
+        for k = 1:172
+            sp(j,k,i-1,1) = monp(j,k,i-1,12) + sum(monp(j,k,i,1:2)); %winter
+            sp(j,k,i-1,2) = sum(monp(j,k,i,3:5)); %spring
+            sp(j,k,i-1,3) = sum(monp(j,k,i,6:8)); %summer
+            sp(j,k,i-1,4) = sum(monp(j,k,i,9:11)); %fall
+        end
+    end
+end
+
+% figure; ax = usamap([36.9 41.1],[-109.1 -101.9]);
+% pcolorm(cololats,cololons,squeeze(sp(:,:,65,2))-squeeze(sp(:,:,69,2)))
+% colormap(flipud(viridis_cmap))
+% colorbar
+% geoshow(ax,counties,'facecolor','none')
+
+% ONI = []; %ONI values were read in separately, so this has been commented
+%out. You can find the ONI values used here at 
+%https://origin.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php
+
+sONI = zeros(70,4); %seasonal enso (nyrs x nseasons)
+for i = 1:70
+    sONI(i,1) = mean(ONI(i,2:3));
+    sONI(i,2) = mean(ONI(i,5:6));
+    sONI(i,3) = mean(ONI(i,8:9));
+    sONI(i,4) = mean(ONI(i,11:12));
+end
+
+sONI = zeros(70,4); %seasonal enso (nyrs x nseasons)
+for i = 1:70
+    sONI(i,1) = ONI(i,1);
+    sONI(i,2) = ONI(i,4);
+    sONI(i,3) = ONI(i,7);
+    sONI(i,4) = ONI(i,10);
+end
+
+scorr = zeros(101,172,4); %correlation between ONI and precip (lats x lons x nseasons)
+alpha = zeros(101,172,4); %significance level of correlation
+for j = 1:101
+    for k = 1:172
+        for m = 1:4
+            [scorr(j,k,m),alpha(j,k,m)] = corr(squeeze(sONI(:,m)),squeeze(sp(j,k,:,m)));
+        end
+    end
+    disp(j)
+end
+
+maskcorr = zeros(101,172,4); %correlation between ONI and precip masked if 
+%not significant at 95% confidence
+
+for j = 1:101
+    for k = 1:172
+        for m = 1:4
+            if alpha(j,k,m) > 0.05
+                maskcorr(j,k,m) = NaN;
+            else
+                maskcorr(j,k,m) = scorr(j,k,m);
+            end
+        end
+    end
+end
+
+%corrcmap is not a MATLAB standard colormap. You will need to either create
+%your own colormap, or ignore this code, and use a MATLAB standard colormap
+%when mapping. corrmap was a red-to-blue colormap I built in another
+%workspace to make pretty correlation plots. The discretized version just
+%uses one bold version of red-and-blue.
+
+corrcmap_disc = zeros(2001,3);
+for i = 1:2001
+    if i < 201
+corrcmap_disc(i,:) = corrcmap(101,:);
+    elseif i < 401
+corrcmap_disc(i,:) = corrcmap(301,:);
+    elseif i < 601
+corrcmap_disc(i,:) = corrcmap(501,:);
+    elseif i < 801
+corrcmap_disc(i,:) = corrcmap(701,:);
+    elseif i < 1201
+corrcmap_disc(i,:) = corrcmap(1001,:);
+    elseif i < 1401
+corrcmap_disc(i,:) = corrcmap(1301,:);
+    elseif i < 1601
+corrcmap_disc(i,:) = corrcmap(1501,:);
+    elseif i < 1801
+corrcmap_disc(i,:) = corrcmap(1701,:);
+    else
+corrcmap_disc(i,:) = corrcmap(1901,:);
+    end
+end
+
+figure;  ax = usamap([36.9 41.1],[-109.1 -101.9]);
+pcolorm(cololats,cololons,squeeze(maskcorr(:,:,1)))
+colormap(corrcmap_disc)
+caxis([-0.05 0.05])
+% cbh = colorbar;
+% cbh.Ticks = [-1 -0.9 -0.7 -0.5 -0.3 -0.1 0 0.1 0.3 0.5 0.7 0.9 1];
+geoshow(ax,counties,'facecolor','none')
+title('DJF')
+saveas(gcf,'ENSOwinter.png')
+
+figure;  ax = usamap([36.9 41.1],[-109.1 -101.9]);
+pcolorm(cololats,cololons,squeeze(maskcorr(:,:,2)))
+colormap(corrcmap_disc)
+caxis([-0.05 0.05])
+% colorbar
+geoshow(ax,counties,'facecolor','none')
+title('MAM')
+saveas(gcf,'ENSOspring.png')
+
+figure;  ax = usamap([36.9 41.1],[-109.1 -101.9]);
+pcolorm(cololats,cololons,squeeze(maskcorr(:,:,3)))
+colormap(corrcmap_disc)
+caxis([-0.05 0.05])
+% colorbar
+geoshow(ax,counties,'facecolor','none')
+title('JJA')
+saveas(gcf,'ENSOsummer.png')
+
+figure;  ax = usamap([36.9 41.1],[-109.1 -101.9]);
+pcolorm(cololats,cololons,squeeze(maskcorr(:,:,4)))
+colormap(corrcmap_disc)
+caxis([-0.05 0.05])
+% colorbar
+geoshow(ax,counties,'facecolor','none')
+title('SON')
+saveas(gcf,'ENSOfall.png')
