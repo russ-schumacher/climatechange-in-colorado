@@ -1,0 +1,179 @@
+%%Climate Change in Colorado Figure 2.1
+
+%load Data: These data come from the "Daily and Monthly Normals" on 
+%https://scacis.rcc-acis.org/. csv included
+
+stncoords = [];
+norms = []; %fill these arrays using data from the included csv.
+
+%Create Figure:
+
+figure; subplot(331), ax = usamap([36.9 41.1],[-109.1 -101.9]);
+scatterm(stn_coords(:,1),stn_coords(:,2),15,'markerfacecolor',[0 0.5 0],'markeredgecolor','none');
+gridm off
+gx.LongitudeAxis.TickValues = [-109 -107 -105 - 103 -101];
+geoshow(counties,'facecolor','none')
+labs = ['A';'B';'C';'D';'E';'F';'G';'H'];
+for i = 1:8
+    if i == 1
+        textm(stn_coords(i,1)+0.1,stn_coords(i,2)-0.5,labs(i))
+    elseif i == 4
+        textm(stn_coords(i,1)+0.25,stn_coords(i,2)-0.03,labs(i))
+    elseif i == 5
+        textm(stn_coords(i,1)+0.15,stn_coords(i,2)+0.25,labs(i))
+    elseif i == 6
+        textm(stn_coords(i,1)-0.1,stn_coords(i,2)-0.5,labs(i))
+    elseif i == 7
+        textm(stn_coords(i,1),stn_coords(i,2)-0.5,labs(i))
+    elseif i == 8
+        textm(stn_coords(i,1)-0.15,stn_coords(i,2)-0.1,labs(i))
+    else
+        textm(stn_coords(i,1)+0.1,stn_coords(i,2)+0.1,labs(i))
+    end
+end
+setm(gca,'MeridianLabel','off')
+% setm(gca,'ParallelLabel','off')
+
+subplot(332), yyaxis left
+bar(norms(:,1,1),'facecolor',[0 0.5 0])
+ax = gca;
+ax.YColor = [0 0.5 0];
+axis([0.5 12.5 0 4])
+ylabel('Precipitation (")')
+yyaxis right
+plot(norms(:,2,1),'color','r','linewidth',2)
+axis([0.5 12.5 0 100])
+ylabel('Temperature (F)')
+set(gca,'xtick',1:12,'xticklabel',['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
+title(sprintf('Steamboat Springs %sft',num2str(stn_coords(1,3))))
+hold on
+plot(norms(:,3,1),'-','color','b','linewidth',2)
+text(1,90,'A','fontsize',12,'fontweight','bold')
+ax = gca;
+ax.YColor = 'k';
+
+subplot(333), yyaxis left
+bar(norms(:,1,2),'facecolor',[0 0.5 0])
+ax = gca;
+ax.YColor = [0 0.5 0];
+axis([0.5 12.5 0 4])
+ylabel('Precipitation (")')
+yyaxis right
+plot(norms(:,2,2),'color','r','linewidth',2)
+axis([0.5 12.5 0 100])
+ylabel('Temperature (F)')
+set(gca,'xtick',1:12,'xticklabel',['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
+title(sprintf('Akron %sft',num2str(stn_coords(2,3))))
+hold on
+plot(norms(:,3,2),'-','color','b','linewidth',2)
+text(1,90,'B','fontsize',12,'fontweight','bold')
+ax = gca;
+ax.YColor = 'k';
+
+subplot(334), yyaxis left
+bar(norms(:,1,3),'facecolor',[0 0.5 0])
+ax = gca;
+ax.YColor = [0 0.5 0];
+axis([0.5 12.5 0 4])
+ylabel('Precipitation (")')
+yyaxis right
+plot(norms(:,2,3),'color','r','linewidth',2)
+axis([0.5 12.5 0 100])
+ylabel('Temperature (F)')
+set(gca,'xtick',1:12,'xticklabel',['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
+title(sprintf('Grand Junction %sft',num2str(stn_coords(3,3))))
+hold on
+plot(norms(:,3,3),'-','color','b','linewidth',2)
+text(1,90,'C','fontsize',12,'fontweight','bold')
+ax = gca;
+ax.YColor = 'k';
+
+subplot(335), yyaxis left
+bar(norms(:,1,4),'facecolor',[0 0.5 0])
+ax = gca;
+ax.YColor = [0 0.5 0];
+axis([0.5 12.5 0 4])
+ylabel('Precipitation (")')
+yyaxis right
+plot(norms(:,2,4),'color','r','linewidth',2)
+axis([0.5 12.5 0 100])
+ylabel('Temperature (F)')
+set(gca,'xtick',1:12,'xticklabel',['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
+title(sprintf('Climax %sft',num2str(stn_coords(4,3))))
+hold on
+plot(norms(:,3,4),'-','color','b','linewidth',2)
+text(1,90,'D','fontsize',12,'fontweight','bold')
+ax = gca;
+ax.YColor = 'k';
+
+subplot(336), yyaxis left
+bar(norms(:,1,5),'facecolor',[0 0.5 0])
+ax = gca;
+ax.YColor = [0 0.5 0];
+axis([0.5 12.5 0 4])
+ylabel('Precipitation (")')
+yyaxis right
+plot(norms(:,2,5),'color','r','linewidth',2)
+axis([0.5 12.5 0 100])
+ylabel('Temperature (F)')
+set(gca,'xtick',1:12,'xticklabel',['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
+title(sprintf('Denver %sft',num2str(stn_coords(5,3))))
+hold on
+plot(norms(:,3,5),'-','color','b','linewidth',2)
+text(1,90,'E','fontsize',12,'fontweight','bold')
+ax = gca;
+ax.YColor = 'k';
+
+subplot(337), yyaxis left
+bar(norms(:,1,6),'facecolor',[0 0.5 0])
+ax = gca;
+ax.YColor = [0 0.5 0];
+axis([0.5 12.5 0 4])
+ylabel('Precipitation (")')
+yyaxis right
+plot(norms(:,2,6),'color','r','linewidth',2)
+axis([0.5 12.5 0 100])
+ylabel('Temperature (F)')
+set(gca,'xtick',1:12,'xticklabel',['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
+title(sprintf('Vallecito Dam %sft',num2str(stn_coords(6,3))))
+hold on
+plot(norms(:,3,6),'-','color','b','linewidth',2)
+text(1,90,'F','fontsize',12,'fontweight','bold')
+ax = gca;
+ax.YColor = 'k';
+
+subplot(338), yyaxis left
+bar(norms(:,1,7),'facecolor',[0 0.5 0])
+ax = gca;
+ax.YColor = [0 0.5 0];
+axis([0.5 12.5 0 4])
+ylabel('Precipitation (")')
+yyaxis right
+plot(norms(:,2,7),'color','r','linewidth',2)
+axis([0.5 12.5 0 100])
+ylabel('Temperature (F)')
+set(gca,'xtick',1:12,'xticklabel',['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
+title(sprintf('Monte Vista %sft',num2str(stn_coords(7,3))))
+hold on
+plot(norms(:,3,7),'-','color','b','linewidth',2)
+text(1,90,'G','fontsize',12,'fontweight','bold')
+ax = gca;
+ax.YColor = 'k';
+
+subplot(339), yyaxis left
+bar(norms(:,1,8),'facecolor',[0 0.5 0])
+ax = gca;
+ax.YColor = [0 0.5 0];
+axis([0.5 12.5 0 4])
+ylabel('Precipitation (")')
+yyaxis right
+plot(norms(:,2,8),'color','r','linewidth',2)
+axis([0.5 12.5 0 100])
+ylabel('Temperature (F)')
+set(gca,'xtick',1:12,'xticklabel',['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
+title(sprintf('Rocky Ford %sft',num2str(stn_coords(8,3))))
+hold on
+plot(norms(:,3,8),'-','color','b','linewidth',2)
+text(1,90,'H','fontsize',12,'fontweight','bold')
+ax = gca;
+ax.YColor = 'k';
