@@ -1,0 +1,23 @@
+Product:               LOCA daily surface water projections hydrologic data
+Variables:             precip    Tair      
+ NetCDF type:          float     float     
+ NetCDF missing value:  1e+30     1e+30     
+Period:                1950Jan through 2099Dec
+Resolution:            1/16 degree
+Latitude bounds:       (38.5, 39.25)
+Longitude bounds:      (-107.25, -106.5)
+Area within bounds:    5414 km^2 (approx)
+Dimensions:         
+ Times:                54787
+ Latitudes:            12
+ Longitudes:           12
+ Projections:          32
+
+
+Global attributes
+-----------------
+Conventions:           CF-1.4
+authors:               David W Pierce
+description:           LOCA daily hydrology projections 
+creation_date:         July, 2016
+institution:           Scripps Institution of Oceanography
