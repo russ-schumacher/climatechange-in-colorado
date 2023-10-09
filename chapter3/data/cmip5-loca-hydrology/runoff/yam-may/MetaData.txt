@@ -1,0 +1,27 @@
+Product:               LOCA daily surface water projections hydrologic data
+Variables:             runoff    
+ NetCDF type:          float     
+ NetCDF missing value:  1e+30     
+Period:                1950Jan through 2099Dec
+Resolution:            1/16 degree
+Latitude bounds:       (40.0, 40.875)
+Longitude bounds:      (-108.125, -106.625)
+Area within bounds:    12352 km^2 (approx)
+Dimensions:         
+ Times:                54787
+ Latitudes:            14
+ Longitudes:           24
+ Projections:          32
+
+Catchment Info (based on 1/8 degree cells):
+ Outlet cell:          (40.4375, -108.0625)
+ Trib cells:           236
+ Trib area (approx):   8677 km^2
+
+Global attributes
+-----------------
+Conventions:           CF-1.4
+authors:               David W Pierce
+description:           LOCA daily hydrology projections 
+creation_date:         July, 2016
+institution:           Scripps Institution of Oceanography
