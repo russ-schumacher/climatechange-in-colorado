@@ -1,0 +1,23 @@
+Product:               Regridded GCM data
+Variables:             Tavg      Prcp      
+ Statistics:           Spatial Mean
+Period:                1950Jan through 2099Jan
+Resolution:            2 degree
+Latitude bounds:       (36.0, 42.0)
+Longitude bounds:      (-110.0, -100.0)
+Area within bounds:    576310 km^2 (approx)
+Dimensions:         
+ Times:                1789
+ Latitudes:            3
+ Longitudes:           5
+ Projections:          16
+
+
+Global attributes
+-----------------
+Conventions:           GDT 1.2
+authors:               E.Maurer,L.Brekke,T.Pruitt
+description:           Regridded GCM data
+creation_date:         Sept, 2009
+institution:           Santa Clara U., U.S. Bureau of Reclamation, U.S.  Dept.  of Energy
+SurfSgnConvention:     Traditional

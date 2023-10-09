@@ -1,0 +1,16 @@
+bccr_bcm2_0.1.sresb1
+cccma_cgcm3_1.1.sresb1
+cnrm_cm3.1.sresb1
+csiro_mk3_0.1.sresb1
+gfdl_cm2_0.1.sresb1
+gfdl_cm2_1.1.sresb1
+giss_model_e_r.1.sresb1
+inmcm3_0.1.sresb1
+ipsl_cm4.1.sresb1
+miroc3_2_medres.1.sresb1
+miub_echo_g.1.sresb1
+mpi_echam5.1.sresb1
+mri_cgcm2_3_2a.1.sresb1
+ncar_ccsm3_0.1.sresb1
+ncar_pcm1.2.sresb1
+ukmo_hadcm3.1.sresb1
