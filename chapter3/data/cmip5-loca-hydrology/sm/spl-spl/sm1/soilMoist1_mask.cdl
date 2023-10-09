@@ -1,0 +1,58 @@
+netcdf tmp_mask.soilMoist1 {
+dimensions:
+	Lon = 18 ;
+	Lat = 14 ;
+	Time = UNLIMITED ; // (1 currently)
+variables:
+	float Lon(Lon) ;
+		Lon:long_name = "longitude" ;
+		Lon:standard_name = "longitude" ;
+		Lon:units = "degreesE" ;
+	float Lat(Lat) ;
+		Lat:long_name = "latitude" ;
+		Lat:standard_name = "latitude" ;
+		Lat:units = "degreesN" ;
+	double Time(Time) ;
+		Time:long_name = "time" ;
+		Time:units = "days since 1800-01-01" ;
+	float soilMoist1(Time, Lat, Lon) ;
+		soilMoist1:long_name = "soilMoist1" ;
+		soilMoist1:units = "mm" ;
+		soilMoist1:missing_value = 1.e+30f ;
+		soilMoist1:_FillValue = 1.e+30f ;
+
+// global attributes:
+		:Conventions = "CF-1.4" ;
+		:creation_date = "Fri Jul 15 13:10:46 2016" ;
+		:output_version = 0 ;
+		:version_description = "" ;
+		:created_by = "pierce" ;
+		:cmd_line = "/home/pierce/src/mine/vic_utils/xtslab2nc -rm_slabs -template /net/loca2/LOCA_2016-04-02/ACCESS1-0/16th/historical/r1i1p1/tasmax/tasmax_day_ACCESS1-0_historical_r1i1p1_20050101-20051231.LOCA_2016-04-02.16th.nc -dir ../vic_output.historical -fname_base flux_snow -flux ../../fluxdescrip_dpierce_27_vars.txt" ;
+		:run_in_directory = "/home/pierce/projects/vic_LOCA/NAmer/ACCESS1-0/vic_output.historical.netcdf" ;
+data:
+
+ Lon = -106.0938, -106.0312, -105.9688, -105.9062, -105.8438, -105.7812, 
+    -105.7188, -105.6562, -105.5938, -105.5312, -105.4688, -105.4062, 
+    -105.3438, -105.2812, -105.2188, -105.1562, -105.0938, -105.0312 ;
+
+ Lat = 38.78125, 38.84375, 38.90625, 38.96875, 39.03125, 39.09375, 39.15625, 
+    39.21875, 39.28125, 39.34375, 39.40625, 39.46875, 39.53125, 39.59375 ;
+
+ Time = 54786 ;
+
+ soilMoist1 =
+   _, _, _, _, 1, 1, 1, 1, _, _, _, _, _, _, _, _, _, _, 
+   _, _, _, _, 1, 1, 1, 1, _, _, _, _, _, _, _, _, _, _, 
+   _, _, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _, _, 
+   _, _, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _, _, 
+   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _, _, 
+   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _, _, 
+   _, _, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _, _, 
+   _, _, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _, _, 
+   _, _, _, _, 1, 1, 1, 1, 1, 1, _, _, _, _, _, _, _, _, 
+   _, _, _, _, 1, 1, 1, 1, 1, 1, _, _, _, _, _, _, _, _ ;
+}
