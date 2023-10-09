@@ -1,0 +1,25 @@
+Product:               Regridded GCM data
+Variables:             tas       pr        
+ NetCDF type:          float     float     
+ NetCDF missing value:  1e+20     1e+20     
+ Statistics:           Spatial Mean
+Period:                1950Jan through 2099Dec
+Resolution:            1 degree
+Latitude bounds:       (36.0, 42.0)
+Longitude bounds:      (-110.0, -101.0)
+Area within bounds:    518679 km^2 (approx)
+Dimensions:         
+ Times:                1800
+ Latitudes:            6
+ Longitudes:           9
+ Projections:          36
+
+
+Global attributes
+-----------------
+Conventions:           GDT 1.2
+authors:               Bridget Thrasher, Ed Maurer
+description:           Regridded GCM data
+creation_date:         2012
+institution:           Climate Analytics Group, Santa Clara U.
+SurfSgnConvention:     Traditional
