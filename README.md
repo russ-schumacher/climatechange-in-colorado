@@ -1,5 +1,5 @@
 # climatechange-in-colorado
-Datasets and code used to conduct analyses presented in the 2023 Climate Change in Colorado report, available at [https://climatechange.colostate.edu](https://climatechange.colostate.edu).
+Datasets and code used to conduct analyses presented in the 2024 Climate Change in Colorado report, available at [https://climatechange.colostate.edu](https://climatechange.colostate.edu).
 
 Figures in the report (and the associated code included here) were variously generated in Python, R, Matlab, and Excel. 
 
