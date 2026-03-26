@@ -5,7 +5,7 @@ library(RcppRoll)
 library(ggplot2)
 
 # open CSV file for a station, read in variables
-var <- read.csv('daily_snowfall_051121.csv', header=TRUE, stringsAsFactors=FALSE)
+var <- read.csv('data/daily_snowfall_051121.csv', header=TRUE, stringsAsFactors=FALSE)
 attach(var)
 
 syr <- substr(Date,1,4)
